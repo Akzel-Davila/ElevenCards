@@ -109,5 +109,6 @@ public class Card {
     }
     public static void updateHand(ArrayList<Card> hand, int index){
         hand.remove(index);
+        hand.add(deck.get((int)(Math.random()*deck.size())));
     }
 }
