@@ -14,7 +14,6 @@ public class Card {
     private BufferedImage image;
     private Rectangle cardBox;
     private boolean highlight;
-    private static ArrayList<Card> deck;
 
     public Card(String suit, String value) {
         this.suit = suit;
@@ -25,7 +24,6 @@ public class Card {
         this.image = readImage();
         this.cardBox = new Rectangle(-100, -100, image.getWidth(), image.getHeight());
         this.highlight = false;
-        deck = new ArrayList<Card>();
     }
 
     public Rectangle getCardBox() {
@@ -87,6 +85,7 @@ public class Card {
     }
 
     public static ArrayList<Card> buildDeck() {
+        ArrayList<Card> deck = new ArrayList<Card>();
         String[] suits = {"clubs", "diamonds", "hearts", "spades"};
         String[] values = {"02", "03", "04", "05", "06", "07", "08", "09", "10", "A", "J", "K", "Q"};
         for (String s : suits) {
@@ -99,6 +98,7 @@ public class Card {
     }
 
     public static ArrayList<Card> buildHand() {
+        ArrayList<Card> deck = Card.buildDeck();
         ArrayList<Card> hand = new ArrayList<Card>();
         for (int i = 0; i < 9; i++) {
             int r = (int)(Math.random()*deck.size());
@@ -106,9 +106,5 @@ public class Card {
             hand.add(c);
         }
         return hand;
-    }
-    public static void updateHand(ArrayList<Card> hand, int index){
-        hand.remove(index);
-        hand.add(deck.get((int)(Math.random()*deck.size())));
     }
 }

@@ -10,12 +10,16 @@ import java.awt.Font;
 class DrawPanel extends JPanel implements MouseListener {
 
     private ArrayList<Card> hand;
+    private ArrayList<Card> deck;
     private Rectangle button;
+    private Deck d;
 
     public DrawPanel() {
         button = new Rectangle(147, 325, 160, 26);
         this.addMouseListener(this);
-        hand = Card.buildHand();
+        d = new Deck();
+        hand = d.getHand();
+        deck = d.getDeck();
     }
 
     protected void paintComponent(Graphics g) {
@@ -61,7 +65,7 @@ class DrawPanel extends JPanel implements MouseListener {
             for (int i = 0; i < hand.size(); i++) {
                 Rectangle box = hand.get(i).getCardBox();
                 if(hand.get(i).getHighlight()){
-                    Card.updateHand(hand, i);
+                    d.updateHand(i);
                 }
                 if (box.contains(clicked)) {
                     hand.get(i).flipHighlight();
